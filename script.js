@@ -68,7 +68,9 @@ function draw_vectors_default() {
         }
     }
     ctx.stroke();
+    ctx.closePath();
 }
+
 
 // draw vector with position and direction (deg)
 function draw_vec(ctx,x,y,mouseX,mouseY) {
