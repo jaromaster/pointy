@@ -1,0 +1,16 @@
+body {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    background-color: rgb(85, 85, 85);
+}
+
+h1, h3 {
+    color: white;
+}
+
+#myCanvas {
+    height: 70vh;
+    width: 100%;
+}
