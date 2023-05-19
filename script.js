@@ -3,11 +3,11 @@
 const canvasId = "myCanvas";
 const divId = "canvasDiv";
 const rows = 20;
-const cols = 60;
+const cols = 50;
 const offset = 10; //px
 const rectSide = 15; //px
-const vecLen = 21; //px
-const colorDist = 50; //px, color nearest vectors
+const circleRadius = 15; //px
+let vecLen; //px
 
 
 // point rows * cols arrows pointing at (mouseX, mouseY)
@@ -19,14 +19,20 @@ function draw_vectors(mouseX, mouseY) {
     canvas.height = div.offsetHeight;
 
     ctx.clearRect(0,0,canvas.width,canvas.height);
-    ctx.beginPath();
-    ctx.strokeStyle = "rgb(0,0,255)";
     ctx.lineWidth = 5;
     
     const stepX = Math.floor((canvas.width-2*offset) / cols);
     const stepY = Math.floor((canvas.height-2*offset) / rows);
+    vecLen = Math.min(stepX,stepY)-2;
 
     // drawing
+    ctx.fillStyle = "red";
+    ctx.moveTo(mouseX,mouseY);
+    ctx.arc(mouseX,mouseY,circleRadius,0,2*Math.PI,false);
+    ctx.fill();
+
+    ctx.strokeStyle = "blue";
+    ctx.beginPath();
     for (let x = offset; x <= canvas.width-offset; x+=stepX) {
         for (let y = offset; y <= canvas.height-offset; y+=stepY) {
             // draw vec
@@ -34,6 +40,7 @@ function draw_vectors(mouseX, mouseY) {
         }
     }
     ctx.stroke();
+    ctx.closePath();
 }
 
 // draw arrows in default position (pointing downwards)
@@ -51,6 +58,7 @@ function draw_vectors_default() {
     
     const stepX = Math.floor((canvas.width-2*offset) / cols);
     const stepY = Math.floor((canvas.height-2*offset) / rows);
+    vecLen = Math.min(stepX,stepY)-2;
 
     // drawing
     for (let x = offset; x <= canvas.width-offset; x+=stepX) {
